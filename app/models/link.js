@@ -12,6 +12,8 @@ var Link = db.Model.extend({
     return this.hasMany(Click);
   },
   initialize: function() {
+    // shortens url 
+    //everytime you make a new link model, you shorten url via below fxn
     this.on('creating', function(model, attrs, options) {
       var shasum = crypto.createHash('sha1');
       shasum.update(model.get('url'));

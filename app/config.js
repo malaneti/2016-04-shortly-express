@@ -1,3 +1,4 @@
+// this is our schema file 
 var path = require('path');
 var knex = require('knex')({
   client: 'sqlite3',
@@ -32,6 +33,18 @@ db.knex.schema.hasTable('clicks').then(function(exists) {
       click.timestamps();
     }).then(function (table) {
       console.log('Created Table', table);
+    });
+  }
+});
+
+db.knex.schema.hasTable('users').then(function(exists) { 
+  if (!exists) {
+    db.knex.schema.createTable('users', function(user) {
+      user.increments('id').primary();
+      user.string('username', 16);
+      user.string('password', 16);
+    }).then(function(table) {
+      console.log('created users table!');
     });
   }
 });
